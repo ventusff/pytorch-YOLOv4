@@ -10,6 +10,7 @@ from pycocotools import mask as coco_mask
 from pycocotools.coco import COCO
 
 from . import transforms as T
+from tqdm import tqdm
 
 
 class FilterAndRemapCocoCategories(object):
@@ -152,7 +153,7 @@ def convert_to_coco_api(ds, bbox_fmt='voc'):
     ann_id = 1
     dataset = {'images': [], 'categories': [], 'annotations': []}
     categories = set()
-    for img_idx in range(len(ds)):
+    for img_idx in tqdm(range(len(ds)), desc="convert to coco"):
         # find better way to get target
         # targets = ds.get_annotations(img_idx)
         img, targets = ds[img_idx]
