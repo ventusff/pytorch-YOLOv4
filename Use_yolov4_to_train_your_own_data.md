@@ -62,6 +62,8 @@ tensorboard --logdir log --host 192.168.212.75 --port 6008
 python model.py 3 weight/Yolov4_epoch166_coins.pth data/coin2.jpg data/coins.names
 
 python model.py num_classes weightfile imagepath namefile
+
+python eval.py 21 ./data/mp3d.names ~/yolov4/yolo_dataset_mp3d/img 512 512 ~/Yolov4_epoch140.pth
 ```
 coins.names
 ```

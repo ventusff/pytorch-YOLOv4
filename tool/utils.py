@@ -6,7 +6,7 @@ import numpy as np
 
 import itertools
 import struct  # get_image_size
-import imghdr  # get_image_size
+import imghdr
 
 
 def sigmoid(x):
@@ -124,8 +124,10 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
             rgb = (255, 0, 0)
         if len(box) >= 7 and class_names:
             cls_conf = box[5]
+            if not isinstance(cls_conf, str):
+                cls_conf = " {:.3f}".format(cls_conf)
             cls_id = box[6]
-            print('%s: %f' % (class_names[cls_id], cls_conf))
+            # print('%s: %f' % (class_names[cls_id], cls_conf))
             classes = len(class_names)
             offset = cls_id * 123457 % classes
             red = get_color(2, offset, classes)
@@ -133,7 +135,7 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
             blue = get_color(0, offset, classes)
             if color is None:
                 rgb = (red, green, blue)
-            img = cv2.putText(img, class_names[cls_id], (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.2, rgb, 1)
+            img = cv2.putText(img, "{}{}".format(class_names[cls_id], cls_conf) , (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, rgb, 2)
         img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, 1)
     if savename:
         print("save plot results to %s" % savename)
