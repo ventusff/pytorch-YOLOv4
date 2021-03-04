@@ -19,6 +19,14 @@ if __name__ == "__main__":
         if not os.path.exists(video_dir):
             os.makedirs(video_dir)
 
+    """ width, height is the original size of the image
+    Inference input size is 416*416 does not mean training size is the same
+    Training size could be 608*608 or even other sizes
+    Optional inference sizes:
+      Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+      Width in {320, 416, 512, 608, ... 320 + 96 * m}
+    """
+
     eval_model = False
     if len(sys.argv) == 6:
         n_classes = int(sys.argv[1])
@@ -98,6 +106,8 @@ if __name__ == "__main__":
                     y2 / float(height),
                     None, "", id])
 
+            ############################  detect: start   ##################################
+
             img = cv2.imread(os.path.join(dataset_dir, imgfile))
 
             # Inference input size is 416*416 does not mean training size is the same
@@ -120,6 +130,8 @@ if __name__ == "__main__":
                     to_plot = np.concatenate([to_plot, pred], axis=1)
             
             # to_plot = (255 * np.clip(to_plot, 0, 1)).astype(np.uint8)
+
+            ############################  detect: end   ##################################
 
             if output_video:
                 # to_plots.append(to_plot)
