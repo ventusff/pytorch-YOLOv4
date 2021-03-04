@@ -64,6 +64,8 @@ python model.py 3 weight/Yolov4_epoch166_coins.pth data/coin2.jpg data/coins.nam
 python model.py num_classes weightfile imagepath namefile
 
 python eval.py 21 ./data/mp3d.names ~/yolov4/yolo_dataset_mp3d/img 512 512 ~/Yolov4_epoch140.pth
+
+python eval.py 21 ./data/mp3d.names /data/datasets/habitat/data/yolo_dataset_mp3d/img 512 512 /data/Yolov4_epoch146.pt
 ```
 coins.names
 ```
